@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: product-catalog-backend
+    container_name: desafio-ecommerce-backend
     ports:
       - "8083:8083"
     depends_on:
