@@ -2,10 +2,12 @@ package br.com.ecommerce.api.service.impl;
 
 import br.com.ecommerce.api.dto.category.CategoryRequestDTO;
 import br.com.ecommerce.api.dto.category.CategoryResponseDTO;
+import br.com.ecommerce.api.exception.ConflictException;
 import br.com.ecommerce.api.mapper.CategoryMapper;
 import br.com.ecommerce.api.model.Category;
 import br.com.ecommerce.api.model.Owner;
 import br.com.ecommerce.api.repository.CategoryRepository;
+import br.com.ecommerce.api.repository.ProductRepository;
 import br.com.ecommerce.api.service.CategoryService;
 import br.com.ecommerce.api.helper.ValidationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ import java.util.List;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -66,6 +71,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void deleteCategory(Long id) {
         Category category = validationHelper.validateCategory(id);
+
+        if (productRepository.existsByCategoryId(id)) {
+            throw new ConflictException("A categoria não pode ser deletada pois está vinculada a um ou mais produtos.");
+        }
+
         categoryRepository.delete(category);
     }
 }
