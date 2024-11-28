@@ -4,9 +4,8 @@ Este repositório contém a parte do Backend com Java, para o desafio de constru
 
 ## Pré-requisitos
 
-- Git
-- Docker e Docker Compose instalados
-- Banco de dados PostgreSQL configurado (gerenciado pelo Docker)
+- Git instalado
+- Docker instalado
 
 ## Estrutura do Projeto
 
