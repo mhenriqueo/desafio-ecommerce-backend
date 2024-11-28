@@ -10,6 +10,7 @@ import br.com.ecommerce.api.repository.CategoryRepository;
 import br.com.ecommerce.api.repository.ProductRepository;
 import br.com.ecommerce.api.service.CategoryService;
 import br.com.ecommerce.api.helper.ValidationHelper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -18,19 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
 
-    @Autowired
-    private ProductRepository productRepository;
-
-    @Autowired
-    private CategoryRepository categoryRepository;
-
-    @Autowired
-    private CategoryMapper categoryMapper;
-
-    @Autowired
-    private ValidationHelper validationHelper;
+    private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
+    private final CategoryMapper categoryMapper;
+    private final ValidationHelper validationHelper;
 
     @Override
     public CategoryResponseDTO saveCategory(CategoryRequestDTO categoryRequest) {

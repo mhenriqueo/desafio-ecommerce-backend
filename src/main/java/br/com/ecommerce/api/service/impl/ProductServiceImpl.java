@@ -9,6 +9,7 @@ import br.com.ecommerce.api.model.Product;
 import br.com.ecommerce.api.repository.ProductRepository;
 import br.com.ecommerce.api.service.ProductService;
 import br.com.ecommerce.api.helper.ValidationHelper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -17,16 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
-    private ProductRepository productRepository;
-
-    @Autowired
-    private ProductMapper productMapper;
-
-    @Autowired
-    private ValidationHelper validationHelper;
+    private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
+    private final ValidationHelper validationHelper;
 
     @Override
     public ProductResponseDTO saveProduct(ProductRequestDTO productRequest) {
