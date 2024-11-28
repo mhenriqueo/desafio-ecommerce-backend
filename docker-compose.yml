@@ -1,8 +1,20 @@
-version: "3.8"
+version: '3.8'
 services:
+  frontend:
+    build:
+      context: ./desafio-ecommerce-frontend
+      dockerfile: Dockerfile
+    container_name: desafio-ecommerce-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - catalog-network
+
   backend:
     build:
-      context: .
+      context: ./desafio-ecommerce-backend
       dockerfile: Dockerfile
     container_name: desafio-ecommerce-backend
     ports:
@@ -19,7 +31,7 @@ services:
 
   postgres:
     image: postgres:15
-    container_name: ecommerce-db
+    container_name: desafio-ecommerce-db
     restart: always
     ports:
       - "5432:5432"
